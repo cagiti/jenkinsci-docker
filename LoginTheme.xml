@@ -1,0 +1,21 @@
+<?xml version='1.1' encoding='UTF-8'?>
+<io.jenkins.plugins.logintheme.LoginTheme plugin="login-theme@1.1">
+  <head>&lt;?jelly escape-by-default=&apos;true&apos;?&gt;
+&lt;j:jelly xmlns:j=&quot;jelly:core&quot;&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;${resURL}/css/simple-page.css&quot; type=&quot;text/css&quot; /&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;${resURL}/css/simple-page.theme.css&quot; type=&quot;text/css&quot; /&gt;
+  &lt;style&gt;
+    .simple-page .logo {
+        background-image: url(&apos;https://assets.currencycloud.com/wp-content/uploads/2018/01/cropped-site_icon-1-270x270.png&apos;);
+        background-repeat: no-repeat;
+        background-position: 50% 0;
+        background-size: contain;
+        height: 130px;
+    }
+  &lt;/style&gt;
+  &lt;link rel=&quot;stylesheet&quot; href=&quot;${resURL}/css/simple-page-forms.css&quot; type=&quot;text/css&quot; /&gt;
+&lt;/j:jelly&gt;</head>
+  <header></header>
+  <footer></footer>
+  <useDefaultTheme>true</useDefaultTheme>
+</io.jenkins.plugins.logintheme.LoginTheme>
