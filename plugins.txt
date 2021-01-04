@@ -123,6 +123,7 @@ pam-auth:1.6
 parameterized-trigger:2.39
 pipeline-build-step:2.13
 pipeline-github-lib:1.0
+pipeline-github:2.7
 pipeline-graph-analysis:1.10
 pipeline-input-step:2.12
 pipeline-milestone-step:1.3.1
