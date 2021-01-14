@@ -1,0 +1,46 @@
+name: "Update Center"
+on:
+  schedule:
+  - cron: "0 0 * * *"
+
+jobs:
+  updatecenter:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Get Update Center
+      uses: robinraju/release-downloader@v1
+      with:
+        repository: "garethjevans/uc"
+        latest: true
+        fileName: "uc-linux-amd64.tar.gz"
+        out-file-path: "downloads"
+
+    - name: Extract Update Center
+      run: tar zxvf ${GITHUB_WORKSPACE}/downloads/uc-linux-amd64.tar.gz uc
+
+    - name: Run Update Center
+      run: ./uc update --path plugins.txt --jenkins-version 2.263.1
+
+    - name: Git Diff
+      run: git diff
+
+    - name: Create Pull Request
+      id: cpr
+      uses: peter-evans/create-pull-request@v3
+      with:
+        token: ${{ secrets.PAT }}
+        commit-message: Update plugin versions
+        author: ${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>
+        branch: update_plugins
+        delete-branch: true
+        title: 'chore: Update plugin versions'
+        body: |
+          Update plugin versions
+        labels: |
+          on_hold
+        assignees: cagiti
+        reviewers: cagiti
+        draft: false
