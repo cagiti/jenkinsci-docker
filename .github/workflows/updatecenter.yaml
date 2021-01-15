@@ -9,26 +9,12 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v2
-
-    - name: Get Update Center
-      uses: robinraju/release-downloader@v1
-      with:
-        repository: "garethjevans/uc"
-        latest: true
-        fileName: "uc-linux-amd64.tar.gz"
-        out-file-path: "downloads"
-
-    - name: Extract Update Center
-      run: tar zxvf ${GITHUB_WORKSPACE}/downloads/uc-linux-amd64.tar.gz uc
-
-    - name: Run Update Center
-      run: ./uc update --path plugins.txt --jenkins-version 2.263.1
     
-    - name: Cleanup
-      run: rm -rf ${GITHUB_WORKSPACE}/downloads uc
-
-    - name: Git Diff
-      run: git diff
+    - name: Update
+      uses: docker://garethjevans/uc:main
+      with:
+        entrypoint: uc
+        args: update --path plugins.txt --jenkins-version 2.263.1 --display-updates-only
 
     - name: Create Pull Request
       id: cpr
