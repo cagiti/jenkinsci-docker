@@ -23,6 +23,9 @@ jobs:
 
     - name: Run Update Center
       run: ./uc update --path plugins.txt --jenkins-version 2.263.1
+    
+    - name: Cleanup
+      run: rm -rf ${GITHUB_WORKSPACE}/downloads uc
 
     - name: Git Diff
       run: git diff
