@@ -1,4 +1,4 @@
-FROM jenkins/jenkins:2.263.1-lts-slim
+FROM jenkins/jenkins:2.263.2-lts-slim
 
 # Install plugins
 COPY plugins.txt /usr/share/jenkins/ref/plugins.txt
