@@ -14,7 +14,7 @@ jobs:
       uses: docker://garethjevans/uc:main
       with:
         entrypoint: uc
-        args: update --path plugins.txt --jenkins-version 2.263.1 --display-updates
+        args: update --path plugins.txt --jenkins-version 2.263.2 --display-updates
 
     - name: Create Pull Request
       id: cpr
