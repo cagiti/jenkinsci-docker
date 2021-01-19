@@ -18,7 +18,7 @@ jobs:
         id: prep
         run: |
           DOCKER_IMAGE=cagiti/jenkins
-          VERSION="2.263.1-lts"
+          VERSION="2.263.2-lts"
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${VERSION}.${GITHUB_REF#refs/tags/}
           elif [[ $GITHUB_REF == refs/heads/* ]]; then
