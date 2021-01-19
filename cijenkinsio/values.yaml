@@ -1,0 +1,98 @@
+# Default values for cijenkinsio.
+#
+jenkins:
+  rbac:
+    readSecrets: true
+  persistence:
+    enabled: true
+    size: 100Gi
+  controller:
+    image: "jenkins/jenkins"
+    tag: "2.263.1-lts"
+    overwritePlugins: false
+    installPlugins: []
+    JCasC:
+      enabled: true
+      defaultConfig: false
+      configScripts:
+        no-executors: |
+          jenkins:
+            numExecutors: 0
+
+        location: |
+          unclassified:
+            location:
+              adminAddress: "nobody@jenkins.io"
+              url: "http://localhost"
+
+        matrix-settings: |
+           jenkins:
+             authorizationStrategy:
+               globalMatrix:
+                 permissions:
+                   - "Overall/Administer:admin"
+                   - "Overall/SystemRead:authenticated"
+                   - "Overall/Read:authenticated"
+                   - "Agent/ExtendedRead:authenticated"
+                   - "Job/ExtendedRead:authenticated"
+                   - "Overall/Read:authenticated"
+                   - "Job/Read:authenticated"
+                   - "View/Read:anonymous"
+
+        security-realm: |
+          jenkins:
+            securityRealm:
+              local:
+                allowsSignup: false
+                users:
+                  - id: "admin"
+                    password: "p4ssw0rd"
+
+        misc-jenkins: |
+          jenkins:
+            remotingSecurity:
+              enabled: true
+            slaveAgentPort: 50000
+
+        system-message: |
+          jenkins:
+            systemMessage: |
+              <div>
+                <h1>Welcome to Currencycloud Jenkins</h1>
+              </div>
+
+        markup-formatter: |
+          jenkins:
+            markupFormatter:
+              rawHtml:
+                disableSyntaxHighlighting: false
+
+        crumb-issuer: |
+          jenkins:
+            crumbIssuer:
+              standard:
+                excludeClientIPFromCrumb: true
+
+        misc-security: |
+          security:
+            apiToken:
+              creationOfLegacyTokenEnabled: false
+              tokenGenerationOnCreationEnabled: false
+              usageStatisticsEnabled: true
+            queueItemAuthenticator:
+              authenticators:
+              - global:
+                  strategy: "triggeringUsersAuthorizationStrategy"
+
+        misc-unclassified: |
+          unclassified:
+            gitSCM:
+              createAccountBasedOnEmail: false
+              globalConfigEmail: "jenkins@domain.local"
+              globalConfigName: "jenkins"
+            pipeline-model-docker:
+              dockerLabel: "docker"
+            pollSCM:
+              pollingThreadCount: 10
+            timestamper:
+              allPipelines: true
