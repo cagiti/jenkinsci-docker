@@ -18,7 +18,7 @@ jobs:
         id: prep
         run: |
           DOCKER_IMAGE=cagiti/jenkins
-          VERSION="2.263.3-lts"
+          VERSION="$(grep '[0-2]*.[0-9]*.[0-9]*-lts' Dockerfile | awk -F':' '{sub("-slim", "",$2); print $2}')"
           if [[ $GITHUB_REF == refs/tags/* ]]; then
             VERSION=${VERSION}.${GITHUB_REF#refs/tags/}
           elif [[ $GITHUB_REF == refs/heads/* ]]; then
